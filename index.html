@@ -31,8 +31,22 @@
 
 <body>
     <div class="container col-sm-8 col-sm-offset-2">
-        <div>
+        <div id="taskApp">
             <h1>To do list app</h1>
+
+            <div class="panel panel-defautl">
+                <h2 class="text-center">Add New Task</h2>
+
+                <form v-on:submit='addTask'>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" v-model="tasks.name">
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="submit" value="Add" class="btn btn-primary btn-block">
+                    </div>
+                </form>
+            </div>
+
             <table class="table">
                 <thead>
                     <th>Checkmark</th>
@@ -40,15 +54,15 @@
                     <th>Delete</th>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr v-for='task in tasks'>
                         <td>
-                            <input type="checkbox" name="" id="">
+                            <input type="checkbox" v-model="task.done">
                         </td>
                         <td>
-                            <span>Nota 1</span>
+                            <span :class="{taskDone: task.done}">{{ task.name }}</span>
                         </td>
                         <td>
-                            <button class="btn btn-danger btn-block">Delete</button>
+                            <button type="button" class="btn btn-danger btn-block" v-on:click="deleteTask(task)">Delete</button>
                         </td>
                     </tr>
 
@@ -56,6 +70,7 @@
             </table>
         </div>
     </div>
+    <script src="script.js"></script>
 </body>
 
 </html>
